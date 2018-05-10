@@ -2,10 +2,12 @@
 
 参照[protoc-gen-micro](https://github.com/micro/protoc-gen-micro)项目进行针对qeelyn项目进行的插件修改
 
+支持grpc代码的生成
+
 ## Install
 
 ```
-go get github.com/micro/protoc-gen-qeelyn
+go get github.com/tsingsun/protoc-gen-goql
 ```
 
 Also required: 
@@ -36,8 +38,8 @@ message Response {
 Generate the code
 
 ```
-protoc --go_out=qeelyn:. examples/greeter/greeter.proto
-protoc --proto_path=$GOPATH/src:. --micro_out=. --go_out=. greeter.proto
+protoc --goql_out=plugins=gprc:. examples/greeter/greeter.proto
+protoc --proto_path=$GOPATH/src:. --goql_out=. greeter.proto
 ```
 
 Your output result should be:
