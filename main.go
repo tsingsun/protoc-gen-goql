@@ -53,8 +53,7 @@ import (
 	"os"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/micro/protoc-gen-micro/generator"
-	_ "github.com/micro/protoc-gen-micro/plugin/micro"
+	"github.com/tsingsun/protoc-gen-goql/generator"
 )
 
 func main() {
@@ -84,7 +83,6 @@ func main() {
 
 	g.SetPackageNames()
 	g.BuildTypeNameMap()
-
 	g.GenerateAllFiles()
 
 	// Send back the results.

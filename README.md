@@ -1,14 +1,11 @@
-# protoc-gen-micro
+# protoc-gen-goql
 
-This is protobuf code generation for micro. We use protoc-gen-micro to reduce boilerplate code.
-
-We previously maintained a [fork](https://github.com/micro/protobuf) of [golang/protobuf](https://github.com/golang/protobuf) 
-to include the micro plugin but have since moved to protoc-gen-micro. 
+参照[protoc-gen-micro](https://github.com/micro/protoc-gen-micro)项目进行针对qeelyn项目进行的插件修改
 
 ## Install
 
 ```
-go get github.com/micro/protoc-gen-micro
+go get github.com/micro/protoc-gen-qeelyn
 ```
 
 Also required: 
@@ -39,6 +36,7 @@ message Response {
 Generate the code
 
 ```
+protoc --go_out=qeelyn:. examples/greeter/greeter.proto
 protoc --proto_path=$GOPATH/src:. --micro_out=. --go_out=. greeter.proto
 ```
 
