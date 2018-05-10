@@ -38,7 +38,7 @@ message Response {
 Generate the code
 
 ```
-protoc --goql_out=plugins=gprc:. examples/greeter/greeter.proto
+protoc --goql_out=plugins=gprc:. testdata/greeter/greeter.proto
 protoc --proto_path=$GOPATH/src:. --goql_out=. greeter.proto
 ```
 

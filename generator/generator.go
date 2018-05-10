@@ -1334,7 +1334,7 @@ func (g *Generator) generateImports() {
 			packageName = "_"
 		}
 		if fullPath == "github.com/golang/protobuf/ptypes/timestamp" {
-			fullPath = "qeelyn.hk/advisorq/fund-core-cn/schemas"
+			fullPath = "github.com/qeelyn/go-common/protobuf"
 		}
 		g.P("import ", packageName, " ", fullPath)
 	}
