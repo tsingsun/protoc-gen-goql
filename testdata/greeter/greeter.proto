@@ -1,3 +1,4 @@
+// protoc --goql_out=./ testdata/greeter/greeter.proto
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
@@ -7,6 +8,7 @@ service Greeter {
 }
 
 message Request {
+    // @inject_tag: valid:"ip" gorm:"foreignkey:UserRefer" json:"name"
     string name = 1;
     google.protobuf.Timestamp start_date = 2;
 }
@@ -15,5 +17,7 @@ message Response {
     string msg = 1;
     int32 int23 = 2;
     float float1 = 3;
+    // @inject json:"name,omitempty"
+    // @inject valid:"ip"
     double double1 = 4;
 }

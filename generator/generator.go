@@ -1742,7 +1742,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	oneofInsertPoints := make(map[int32]int)                           // oneof_index => offset of g.Buffer
 
 	comments := g.PrintComments(message.path)
-
 	// Guarantee deprecation comments appear after user-provided comments.
 	if message.GetOptions().GetDeprecated() {
 		if comments {
@@ -1789,21 +1788,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		typename, wiretype := g.GoType(message, field)
 		jsonName := *field.Name
 
-
-
-
 		var tag string
 
-		if !isJsonOmitEmpty {
-			tag = fmt.Sprintf("protobuf:%s json:%q", g.goTag(message, field, wiretype), jsonName+",omitempty")
-		} else {
-			if _,ok := jsonOmitEmptyMap[typename];!ok {
-				tag = fmt.Sprintf("protobuf:%s json:%q", g.goTag(message, field, wiretype), jsonName+",omitempty")
-			} else {
-				tag = fmt.Sprintf("protobuf:%s json:%q", g.goTag(message, field, wiretype), jsonName)
-			}
-
-		}
+		tag = fmt.Sprintf("protobuf:%s", g.goTag(message, field, wiretype))
 
 		fieldNames[field] = fieldName
 		fieldGetterNames[field] = fieldGetterName
@@ -1817,7 +1804,9 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			// Generate the union field.
 			oneofFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageOneofPath, *field.OneofIndex)
 			com := g.PrintComments(oneofFullPath)
+			tag = g.JoinInjectTagTo(oneofFullPath,tag,typename,jsonName)
 			if com {
+
 				g.P("//")
 			}
 			g.P("// Types that are valid to be assigned to ", fname, ":")
@@ -1900,6 +1889,8 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 		fieldFullPath := fmt.Sprintf("%s,%d,%d", message.path, messageFieldPath, i)
 		g.PrintComments(fieldFullPath)
+
+		tag = g.JoinInjectTagTo(fieldFullPath,tag,typename,jsonName)
 		g.P(Annotate(message.file, fieldFullPath, fieldName), "\t", typename, "\t`", tag, "`", fieldDeprecated)
 		g.RecordTypeUse(field.GetTypeName())
 	}
