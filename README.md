@@ -56,3 +56,9 @@ in greeter.pb.go ,the reject tag will be generate
     // @inject_tag: valid:"ip" gorm:"foreignkey:UserRefer"
 	Name   string    `protobuf:"bytes,1,opt,name=name" json:"name,omitempty" valid:"ip" gorm:"foreignkey:UserRefer"`
 ```
+
+### inject tag 格式为 
+```
+// @inject_tag: {key}:"{value}"
+```
+ 

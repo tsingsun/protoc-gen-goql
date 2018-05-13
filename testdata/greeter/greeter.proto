@@ -17,7 +17,6 @@ message Response {
     string msg = 1;
     int32 int23 = 2;
     float float1 = 3;
-    // @inject json:"name,omitempty"
-    // @inject valid:"ip"
+    // json:"name"
     double double1 = 4;
 }

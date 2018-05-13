@@ -7,10 +7,10 @@ import (
 )
 
 func TestNewTagItems(t *testing.T) {
-	a := `@inject_tag: valid:"ip" gorm:"foreignkey:UserRefer"`
+	a := `@inject_tag: valid:"ip" gorm:"foreignkey:UserRefer" json:"name"`
 
 	exp:= internal.NewTagItems(a)
-	fmt.Println(exp.Format())
+	fmt.Println(exp)
 }
 
 func TestNewTagItemsNoinjectTag(t *testing.T) {

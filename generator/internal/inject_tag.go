@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	injectRule = regexp.MustCompile(`^//\s*@inject_tag:\s*(.*)$`)
+	injectRule = regexp.MustCompile(`^\s*@inject_tag:\s*(.*)$`)
 	rTags    = regexp.MustCompile(`[\w_]+:"[^"]+"`)
 )
 
@@ -34,7 +34,11 @@ func tagFromComment(comment string) (tag string) {
 	return
 }
 
-func NewTagItems(tag string) TagItems {
+func NewTagItems(comment string) TagItems {
+	tag := tagFromComment(comment)
+	if tag == "" {
+		return nil
+	}
 	items := []TagItem{}
 	splitted := rTags.FindAllString(tag, -1)
 
