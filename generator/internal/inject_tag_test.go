@@ -14,9 +14,9 @@ func TestNewTagItems(t *testing.T) {
 }
 
 func TestNewTagItemsNoinjectTag(t *testing.T) {
-	a := `valid:"ip" gorm:"foreignkey:UserRefer"`
+	a := `@inject_tag: gorm:"foreignkey:manager_id"`
 
 	exp:= internal.NewTagItems(a)
-	fmt.Println(exp.Format())
+	fmt.Println(exp)
 }
 

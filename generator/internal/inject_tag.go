@@ -41,7 +41,6 @@ func NewTagItems(comment string) TagItems {
 	}
 	items := []TagItem{}
 	splitted := rTags.FindAllString(tag, -1)
-
 	for _, t := range splitted {
 		t = strings.Replace(t, " ", "", -1)
 		sepPos := strings.Index(t, ":")

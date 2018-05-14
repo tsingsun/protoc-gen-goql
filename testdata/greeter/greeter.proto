@@ -8,8 +8,9 @@ service Greeter {
 }
 
 message Request {
-    // @inject_tag: valid:"ip" gorm:"foreignkey:UserRefer" json:"name"
+    //@inject_tag: gorm:"foreignkey:manager_id"
     string name = 1;
+    //@inject_tag: gorm:"foreignkey:manager_id" json:"start_date"
     google.protobuf.Timestamp start_date = 2;
 }
 

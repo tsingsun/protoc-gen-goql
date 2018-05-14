@@ -20,9 +20,10 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type Request struct {
-	// @inject_tag: valid:"ip" gorm:"foreignkey:UserRefer" json:"name"
-	Name                 string               `protobuf:"bytes,1,opt,name=name" valid:"ip" gorm:"foreignkey:UserRefer" json:"name"`
-	StartDate            *timestamp.Timestamp `protobuf:"bytes,2,opt,name=start_date,json=startDate" json:"start_date,omitempty"`
+	// @inject_tag: gorm:"foreignkey:manager_id"
+	Name string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty" gorm:"foreignkey:manager_id"`
+	// @inject_tag: gorm:"foreignkey:manager_id" json:"start_date"
+	StartDate            *timestamp.Timestamp `protobuf:"bytes,2,opt,name=start_date,json=startDate" gorm:"foreignkey:manager_id" json:"start_date"`
 	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
 	XXX_unrecognized     []byte               `json:"-"`
 	XXX_sizecache        int32                `json:"-"`
@@ -32,7 +33,7 @@ func (m *Request) Reset()         { *m = Request{} }
 func (m *Request) String() string { return proto.CompactTextString(m) }
 func (*Request) ProtoMessage()    {}
 func (*Request) Descriptor() ([]byte, []int) {
-	return fileDescriptor_greeter_cf35e4ce350340f3, []int{0}
+	return fileDescriptor_greeter_e2423f666b70e0af, []int{0}
 }
 func (m *Request) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Request.Unmarshal(m, b)
@@ -67,11 +68,11 @@ func (m *Request) GetStartDate() *timestamp.Timestamp {
 }
 
 type Response struct {
-	Msg    string  `protobuf:"bytes,1,opt,name=msg" json:"msg,omitempty"`
-	Int23  int32   `protobuf:"varint,2,opt,name=int23" json:"int23"`
-	Float1 float32 `protobuf:"fixed32,3,opt,name=float1" json:"float1"`
+	Msg    string  `protobuf:"bytes,1,opt,name=msg" json:"msg,omitempty" `
+	Int23  int32   `protobuf:"varint,2,opt,name=int23" json:"int23" `
+	Float1 float32 `protobuf:"fixed32,3,opt,name=float1" json:"float1" `
 	// json:"name"
-	Double1              float64  `protobuf:"fixed64,4,opt,name=double1" json:"double1"`
+	Double1              float64  `protobuf:"fixed64,4,opt,name=double1" json:"double1" `
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -81,7 +82,7 @@ func (m *Response) Reset()         { *m = Response{} }
 func (m *Response) String() string { return proto.CompactTextString(m) }
 func (*Response) ProtoMessage()    {}
 func (*Response) Descriptor() ([]byte, []int) {
-	return fileDescriptor_greeter_cf35e4ce350340f3, []int{1}
+	return fileDescriptor_greeter_e2423f666b70e0af, []int{1}
 }
 func (m *Response) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Response.Unmarshal(m, b)
@@ -135,10 +136,10 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("testdata/greeter/greeter.proto", fileDescriptor_greeter_cf35e4ce350340f3)
+	proto.RegisterFile("testdata/greeter/greeter.proto", fileDescriptor_greeter_e2423f666b70e0af)
 }
 
-var fileDescriptor_greeter_cf35e4ce350340f3 = []byte{
+var fileDescriptor_greeter_e2423f666b70e0af = []byte{
 	// 232 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x34, 0x8f, 0x41, 0x6b, 0x84, 0x30,
 	0x10, 0x85, 0xc9, 0xee, 0xba, 0xae, 0xd3, 0x4b, 0x19, 0x4a, 0x09, 0x52, 0x5a, 0xd9, 0x4b, 0x3d,

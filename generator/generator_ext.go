@@ -20,26 +20,6 @@ func (g *Generator) SetJsonOmitEmptyMap(list string) {
 	}
 }
 
-// PrintComments prints any comments from the source .proto file.
-// The path is a comma-separated list of integers.
-// It returns an indication of whether any comments were printed.
-// See descriptor.proto for its format.
-func (g *Generator) PrintAndParseComments(path string) (bool, string) {
-	if !g.writeOutput {
-		return false, ""
-	}
-	var tagstr string
-	if loc, ok := g.file.comments[path]; ok {
-		text := strings.TrimSuffix(loc.GetLeadingComments(), "\n")
-		for _, line := range strings.Split(text, "\n") {
-			tagstr += internal.NewTagItems(line).Format()
-			g.P("// ", strings.TrimPrefix(line, " "))
-		}
-		return true, tagstr
-	}
-	return false, ""
-}
-
 func (g *Generator) ParseComments(path string) (internal.TagItems, bool) {
 	if !g.writeOutput {
 		return nil, false
@@ -50,7 +30,9 @@ func (g *Generator) ParseComments(path string) (internal.TagItems, bool) {
 		for _, line := range strings.Split(text, "\n") {
 			lineTag := internal.NewTagItems(line)
 			for _, v := range lineTag {
-				tags = append(tags, v)
+				if v.Key != "" {
+					tags = append(tags, v)
+				}
 			}
 		}
 		return tags, true
@@ -72,9 +54,9 @@ func (g *Generator) JoinInjectTagTo(path string, tag string, typename string, js
 		tag += " " + injectTags.Format()
 	} else {
 		if _, ok := jsonOmitEmptyMap[typename]; !ok {
-			tag += " " + fmt.Sprintf("json:%q", jsonName+",omitempty")
+			tag += " " + fmt.Sprintf("json:%q", jsonName+",omitempty") + " " + injectTags.Format()
 		} else {
-			tag += " " + fmt.Sprintf("json:%q", jsonName)
+			tag += " " + fmt.Sprintf("json:%q", jsonName) + " " + injectTags.Format()
 		}
 	}
 	return tag
