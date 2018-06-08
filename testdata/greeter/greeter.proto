@@ -2,6 +2,7 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 service Greeter {
     rpc Hello (Request) returns (Response);
@@ -12,12 +13,12 @@ message Request {
     string name = 1;
     //@inject_tag: gorm:"foreignkey:manager_id" json:"start_date"
     google.protobuf.Timestamp start_date = 2;
+    google.protobuf.StringValue null_string = 4;
 }
 
 message Response {
     string msg = 1;
     int32 int23 = 2;
     float float1 = 3;
-    //@inject_tag: json:"name"
-    double double1 = 4;
+    google.protobuf.DoubleValue double1 = 4;
 }

@@ -6,7 +6,17 @@ import (
 	"fmt"
 )
 
-var jsonOmitEmptyMap map[string]bool = map[string]bool{}
+var jsonOmitEmptyMap map[string]bool = map[string]bool{
+	"*wrappers.DoubleValue": true,
+	"*wrappers.StringValue": true,
+	"*wrappers.FloatValue":true,
+	"*wrappers.Int64Value":true,
+	"*wrappers.UInt64Value":true,
+	"*wrappers.Int32Value": true,
+	"*wrappers.UInt32Value": true,
+	"*wrappers.BoolValue": true,
+	"*wrappers.BytesValue": true,
+}
 
 // Name returns the name of this plugin, "grpcserial".
 func (g *Generator) Name() string {
