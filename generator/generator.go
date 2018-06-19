@@ -1897,16 +1897,16 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		g.P(Annotate(message.file, fieldFullPath, fieldName), "\t", typename, "\t`", tag, "`", fieldDeprecated)
 		g.RecordTypeUse(field.GetTypeName())
 	}
-	g.P("XXX_NoUnkeyedLiteral\tstruct{} `json:\"-\"`") // prevent unkeyed struct literals
+	g.P("XXX_NoUnkeyedLiteral\tstruct{} `json:\"-\" gorm:\"-\"`") // prevent unkeyed struct literals
 	if len(message.ExtensionRange) > 0 {
 		messageset := ""
 		if opts := message.Options; opts != nil && opts.GetMessageSetWireFormat() {
 			messageset = "protobuf_messageset:\"1\" "
 		}
-		g.P(g.Pkg["proto"], ".XXX_InternalExtensions `", messageset, "json:\"-\"`")
+		g.P(g.Pkg["proto"], ".XXX_InternalExtensions `", messageset, "json:\"-\" gorm:\"-\"`")
 	}
-	g.P("XXX_unrecognized\t[]byte `json:\"-\"`")
-	g.P("XXX_sizecache\tint32 `json:\"-\"`")
+	g.P("XXX_unrecognized\t[]byte `json:\"-\" gorm:\"-\"`")
+	g.P("XXX_sizecache\tint32 `json:\"-\" gorm:\"-\"`")
 	g.Out()
 	g.P("}")
 
