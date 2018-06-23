@@ -1650,7 +1650,12 @@ func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescripto
 		typ, wire = "*"+g.TypeName(desc), "group"
 	case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 		desc := g.ObjectNamed(field.GetTypeName())
-		typ, wire = "*"+g.TypeName(desc), "bytes"
+		switch t := desc.TypeName()[0];t {
+		case "DoubleValue":
+			typ, wire = "*"+g.TypeName(desc), "fixed64"
+		default:
+			typ, wire = "*"+g.TypeName(desc), "bytes"
+		}
 	case descriptor.FieldDescriptorProto_TYPE_BYTES:
 		typ, wire = "[]byte", "bytes"
 	case descriptor.FieldDescriptorProto_TYPE_ENUM:

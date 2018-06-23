@@ -26,9 +26,9 @@ type Request struct {
 	// @inject_tag: gorm:"foreignkey:manager_id" json:"start_date"
 	StartDate            *timestamp.Timestamp  `protobuf:"bytes,2,opt,name=start_date,json=startDate" gorm:"foreignkey:manager_id" json:"start_date"`
 	NullString           *wrappers.StringValue `protobuf:"bytes,4,opt,name=null_string,json=nullString" json:"null_string" `
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-" gorm:"-"`
+	XXX_unrecognized     []byte                `json:"-" gorm:"-"`
+	XXX_sizecache        int32                 `json:"-" gorm:"-"`
 }
 
 func (m *Request) Reset()         { *m = Request{} }
@@ -80,10 +80,10 @@ type Response struct {
 	Msg                  string                `protobuf:"bytes,1,opt,name=msg" json:"msg,omitempty" `
 	Int23                int32                 `protobuf:"varint,2,opt,name=int23" json:"int23,omitempty" `
 	Float1               float32               `protobuf:"fixed32,3,opt,name=float1" json:"float1,omitempty" `
-	Double1              *wrappers.DoubleValue `protobuf:"bytes,4,opt,name=double1" json:"double1" `
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	Double1              *wrappers.DoubleValue `protobuf:"fixed64,4,opt,name=double1" json:"double1" `
+	XXX_NoUnkeyedLiteral struct{}              `json:"-" gorm:"-"`
+	XXX_unrecognized     []byte                `json:"-" gorm:"-"`
+	XXX_sizecache        int32                 `json:"-" gorm:"-"`
 }
 
 func (m *Response) Reset()         { *m = Response{} }
